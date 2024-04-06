@@ -7,11 +7,11 @@
 
 
 int recursive_down(const char* buffer);
-int get_G(const char* buffer);
-int get_E(const char* buffer);
-int get_T(const char* buffer);
-int get_P(const char* buffer);
-int get_N(const char* buffer);
+int get_G();
+int get_E();
+int get_T();
+int get_P();
+int get_N();
 void syntax_error();
 
 #endif // RECURSIVE_DOWN_H

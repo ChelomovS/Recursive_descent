@@ -17,7 +17,7 @@ int main(const int argc, const char** argv)
     fread(buffer, sizeof(char), file_size, filein);
     printf("%s", buffer);
     
-    recursive_down(buffer);
+    printf("%d", recursive_down(buffer));
 
     return 0;
 }

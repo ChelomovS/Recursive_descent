@@ -2,39 +2,35 @@
 #include "debug.h"
 #include "recursive_down.h"
 
+const char* str = nullptr;
+
 int recursive_down(const char* buffer) // written
 {
     ASSERT(buffer != nullptr);
-
+    str = buffer;
     fprintf(stderr, "BEGIN RECURSIVE DOWN\n");
-    return get_G(buffer);
+    return get_G();
 }
 
-int get_G(const char* buffer) // written
+int get_G() // written
 {
-    ASSERT(buffer != nullptr);
-
-    int val = get_E(buffer);
-    $
-    REQUIRE('$', buffer);
-    $
+    int val = get_E();
+    REQUIRE('$', str);
     fprintf(stderr, "Find: $\n");
     fprintf(stderr, "BYE\n");
 
     return val;
 }
 
-int get_E(const char* buffer)
+int get_E()
 {
-    ASSERT(buffer != nullptr);
+    int val = get_T();
 
-    int val = get_T(buffer);
-
-    while (*buffer == '+' || *buffer == '-')
+    while (*str == '+' || *str == '-')
     {
-        char op = *buffer;
-        buffer++;
-        int val2 = get_T(buffer);
+        char op = *str;
+        str++;
+        int val2 = get_T();
         if (op == '+')
         {
             val += val2;
@@ -47,17 +43,16 @@ int get_E(const char* buffer)
     return val;
 }
 
-int get_T(const char* buffer) // written
+int get_T() // written
 {
-    ASSERT(buffer != nullptr);
-    int val = get_P(buffer);
-    while(*buffer == '*' || *buffer == '/')
+    int val = get_P();
+    while(*str == '*' || *str == '/')
     {
-        char op = *buffer;
+        char op = *str;
 
-        buffer++;
+        str++;
 
-        int val2 = get_P(buffer);
+        int val2 = get_P();
 
         if (op == '*')  
         {
@@ -71,40 +66,36 @@ int get_T(const char* buffer) // written
     return val;
 }
 
-int get_P(const char* buffer) // written
+int get_P() // written
 {
-    ASSERT(buffer != nullptr);
-
-    if (*buffer == '(')
+    if (*str == '(')
     {
         fprintf(stderr, "Find: (\n");
-        buffer++;
+        str++;
 
-        int val = get_E(buffer);
-        REQUIRE(')', buffer);
+        int val = get_E();
+        REQUIRE(')', str);
         return val;
     }
     else 
     {
-        return get_N(buffer);
+        return get_N();
     }
 }
 
-int get_N(const char* buffer) // written
+int get_N() // written
 {
-    ASSERT(buffer != nullptr);
-
     int val = 0;
 
-    const char* old_buffer = buffer;
+    const char* old_str = str;
 
-    while('0' <= *buffer && *buffer <= '9')
+    while('0' <= *str && *str <= '9')
     {
-        val = val * 10 + (*buffer - '0');
-        buffer++;
+        val = val * 10 + (*str - '0');
+        str++;
     }
 
-    if (old_buffer == buffer)
+    if (old_str == str)
     {
         syntax_error();
     }

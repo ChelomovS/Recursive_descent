@@ -13,7 +13,7 @@
     write <code>cd Recursive_down</code> in terminal
 
 3. Build & run <br>
-    write <code>make -f make</code> in terminal
+    write <code>make</code> in terminal
    
     При запуске исполняемого файла <code>recursive_down</code> передайте как аргумент командой строки файл, где находится арифметическое выражение, оформленное как в файле <code>example</code>
    

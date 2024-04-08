@@ -13,12 +13,13 @@ int main(const int argc, const char** argv)
     FILE* filein = fopen(argv[1], "r");
     size_t file_size = GetFileSize(filein);
 
-    char buffer[100] = "";
+    char* buffer = (char*)calloc(file_size, sizeof(char));
 
     fread(buffer, sizeof(char), file_size, filein);
-    printf("Buffer: %s \n", buffer);
+
+    fclose(filein);
     
     printf("Result: %.3lf \n", recursive_descent(buffer));
-
+    
     return 0;
 }
